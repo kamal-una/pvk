@@ -131,9 +131,9 @@ class Event(models.Model):
         available_seats = self.seat_set.filter(status=0)
         locked_seats = []
         pointer = 0
+        
         while len(locked_seats) < number_of_seats:
 
-            logging.info('looping through seats: %s', (pointer))
             try:
                 seat = available_seats[pointer]
                 logging.info('Got possible available seat: %s', (seat.id))
@@ -141,7 +141,7 @@ class Event(models.Model):
                 key_seat = self.seat_set.get(id=seat.id)
                 if key_seat.status == 0:
                     seat = seat.lock_seat(transaction, buyer, price)
-                    locked_seats.append(seat.id)
+                    locked_seats.append(seat)
                     logging.info('Seat sucessfully locked: %s', (seat.id))
 
                 pointer += 1
@@ -151,12 +151,12 @@ class Event(models.Model):
                 # release any locked seats
                 logging.info('Releasing locked seats...')
                 for seat in locked_seats:
-                    this_seat = Seat.objects.get(id=seat)
+                    this_seat = Seat.objects.get(id=seat.id)
                     this_seat.unlock_seat(transaction)
                     logging.info('Release %s', (this_seat.id))
                 return False
 
-        return True
+        return locked_seats
 
     def save(self, *args, **kwargs):
         # save the performance...

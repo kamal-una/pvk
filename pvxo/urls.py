@@ -27,6 +27,17 @@ urlpatterns += patterns(
     'frontend.views',
     url(r'^schedule/$', 'schedule', name='schedule'),
     url(r'^buy/(?P<event>[-\w\ ]+)/$', 'buy', name='buy'),
+    url(r'^cart/$', 'cart', name='cart'),
+    url(r'^empty_cart/$', 'empty_cart', name='empty_cart'),
+    url(r'^purchase/$', 'purchase', name='purchase'),
+)
+
+urlpatterns += patterns(
+    'boxoffice.views',
+    url(r'^boxoffice/$', 'box_office', name='box_office'),
+    url(r'^boxoffice/event/$', 'box_office_event', name='box_office_event'),
+    url(r'^boxoffice/event/(?P<event>[-\w\ ]+)/$', 'box_office_event', name='box_office_event'),
+    url(r'^boxoffice/delete-event/(?P<event>[-\w\ ]+)/$', 'box_office_event_delete', name='box_office_event_delete'),
 )
 
 urlpatterns += patterns(

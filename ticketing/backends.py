@@ -1,5 +1,6 @@
 from django.contrib.auth.models import check_password
 from ticketing.models import CustomUser
+import logging
 
 class EmailAuthBackend(object):
     """

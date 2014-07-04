@@ -25,8 +25,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li><a href="/schedule">Events Schedule</a></li>
+                <li><a href="/cart">Shopping Cart</a></li>
                 {% if user.is_staff %}
-                    <li><a href="/admin">Admin</a></li>
+                  <li><a href="/boxoffice">Box Office</a></li>
+                  <li><a href="/admin">Admin</a></li>
                 {% endif %}
               </ul>
               <ul class="nav navbar-nav navbar-right">

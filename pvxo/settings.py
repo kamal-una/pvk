@@ -113,6 +113,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, 'pvxapi/templates'),
     os.path.join(BASE_DIR, 'frontend/templates'),
+    os.path.join(BASE_DIR, 'boxoffice/templates'),
 
 )
     
@@ -132,6 +133,7 @@ INSTALLED_APPS = (
     'autoload',
     'dbindexer',
     'crispy_forms',
+    'cart',
     'frontend',
     'ticketing',
 

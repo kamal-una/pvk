@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.http import StreamingHttpResponse
 from ticketing.models import Event, BuyerType, EventBuyerMapping, PriceMatrix, Price, Transaction
+from cart import Cart
+from django.contrib.auth.decorators import login_required
 import logging
 
 
@@ -25,9 +27,9 @@ def buy(request, event):
         data = request.POST
 
         #make a new transaction
+        logging.info(request.user)
         transaction = Transaction(user=request.user)
         transaction.save()
-        redirect_to_cart = False
 
         # go through the available prices and see what the user has requested
         for price in prices:
@@ -39,21 +41,60 @@ def buy(request, event):
                     number_of_seats = int(data[this_price])
                     if number_of_seats > 0 and number_of_seats < 10:
 
-                        lock_seats = event.lock_seats(transaction, 
-                                                      price.buyer_type, 
-                                                      price.price, 
-                                                      number_of_seats)
-                        if lock_seats:
-                            logging.info('Locked %s seats', (number_of_seats))
-                            redirect_to_cart = True
+                        locked_seats = event.lock_seats(transaction, 
+                                                        price.buyer_type, 
+                                                        price.price, 
+                                                        number_of_seats)
+                        if locked_seats:
+                            logging.info('Locked %s seats', (len(locked_seats)))
+                            # add sets to cart...
+                            cart = Cart(request)
+                            for seat in locked_seats:
+                                cart.add(seat, seat.price, 1)
+                            context.update({'success': 'Seats added to shopping cart'})
                         else:
                             context.update({'error': 'Not enough seats available'})
                             logging.error('Failed to lock seats')
 
-        # only redirect to the cart if we have added some seats
-        if redirect_to_cart:
-            pass
-            #return redirect('cart')
-
     html = render(request, 'buy.html', context)
+    return StreamingHttpResponse(html)
+
+
+def cart(request):
+    cart = Cart(request)
+    total = total_cart(cart)
+
+    context = {'cart': cart,
+               'total': total}
+
+    html = render(request, 'cart.html', context)
+    return StreamingHttpResponse(html)
+
+
+def total_cart(cart):
+    total = 0
+    for item in cart:
+        total += item.product.price
+    return total
+
+
+def empty_cart(request):
+    cart = Cart(request)
+    transaction = Transaction(user=request.user)
+    transaction.save()
+
+    for item in cart:
+        item.product.unlock_seat(transaction)
+        cart.remove(item.product)
+
+    context = {'total': 0}
+
+    html = render(request, 'cart.html', context)
+    return StreamingHttpResponse(html)
+
+
+@login_required
+def purchase(request):
+    context = {}
+    html = render(request, 'cart.html', context)
     return StreamingHttpResponse(html)
