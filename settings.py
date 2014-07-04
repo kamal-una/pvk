@@ -1,0 +1,1 @@
+from pvxo.settings import *

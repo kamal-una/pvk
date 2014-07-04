@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My Account</h1>
+    <div class="col-sm-8 col-sm-offset-2">
+        {% load crispy_forms_tags %}
+        <form role="form" class="form-horizontal" method="post" action="{% url 'my_account' %}">
+            {% crispy form %}
+        </form>
+    </div>
+{% endblock %}

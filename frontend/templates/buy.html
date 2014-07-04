@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1><img src="{{ event.image_url }}" alt="logo" />{{ event.name|title }}</h1>
+<h2>{{ event.date }}</h2>
+
+
+<form action="" method="post">
+{% csrf_token %}
+  <div class="col-xs-6">
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">{{ error }}</div>
+  {% endif %}
+
+        {% regroup prices by category as category_prices %}
+        {% for category in category_prices %}
+
+           <h3>{{ category.grouper.name }}</h3>
+            
+            <ul class="list-group">
+                {% for price in category.list %}
+                <li class="list-group-item">
+                    <select class="selectbuyer" name="{{ category.grouper.id }}-{{ price.buyer_type.id }}">
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                    </select>
+                    <strong>{{ price.buyer_type }}</strong> - £{{ price.price }}
+
+                </li>
+            {% endfor %}
+            </ul>
+
+        {% endfor %}
+
+      <button type="submit" class="btn btn-large btn-success">Buy tickets</button>
+
+  </div>
+</form>
+{% endblock %}
