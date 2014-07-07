@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Events</h1>
+<div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Run</th>
+            <th>Category</th>
+            <th>Date</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td><a href="{% url 'box_office_event' event.id %}">{{ event.name }}</a></td>
+                <td>{{ event.run }}</td>
+                <td>{{ event.category }}</td>
+                <td>{{ event.date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

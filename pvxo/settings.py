@@ -185,3 +185,11 @@ API_URL = 'http://217.19.241.119/services/TicketingAPIV2_6/TicketingAPI.svc'
 API_USERNAME = 'mkds3rv1c3sV2_6'
 API_PASSWORD = 'mkD_89yYjkP!Q!B0x'
 API_NS = '{http://schemas.datacontract.org/2004/07/StormTicketingAPI}'
+
+DATE_INPUT_FORMATS = (
+    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+    '%b %d %Y', '%b %d, %Y',            # 'Oct 25 2006', 'Oct 25, 2006'
+    '%d %b %Y', '%d %b, %Y',            # '25 Oct 2006', '25 Oct, 2006'
+    '%B %d %Y', '%B %d, %Y',            # 'October 25 2006', 'October 25, 2006'
+    '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
+)  

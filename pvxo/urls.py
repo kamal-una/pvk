@@ -35,6 +35,8 @@ urlpatterns += patterns(
 urlpatterns += patterns(
     'boxoffice.views',
     url(r'^boxoffice/$', 'box_office', name='box_office'),
+
+    url(r'^boxoffice/events/$', 'box_office_events', name='box_office_events'),
     url(r'^boxoffice/event/$', 'box_office_event', name='box_office_event'),
     url(r'^boxoffice/event/(?P<event>[-\w\ ]+)/$', 'box_office_event', name='box_office_event'),
     url(r'^boxoffice/delete-event/(?P<event>[-\w\ ]+)/$', 'box_office_event_delete', name='box_office_event_delete'),

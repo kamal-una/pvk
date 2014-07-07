@@ -16,6 +16,17 @@ def box_office(request):
     return StreamingHttpResponse(html)
 
 
+@login_required
+def box_office_events(request):
+    events = Event.objects.all()
+
+    context = {'events': events}
+
+    html = render(request, 'box_office_events.html', context)
+    return StreamingHttpResponse(html)
+
+
+@login_required
 def box_office_event(request, event=None):
     if event:
         event = get_object_or_404(Event, pk=event)
@@ -30,7 +41,7 @@ def box_office_event(request, event=None):
             form.save()
 
     form = EventForm(instance=event)
-    context = {}
+    context = {'form': form}
 
     html = render(request, 'box_office_event.html', context)
     return StreamingHttpResponse(html)

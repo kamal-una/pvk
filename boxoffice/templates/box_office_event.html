@@ -4,11 +4,11 @@
 {% block content %}
 <h1>Event Setup</h1>
 <div class="container">
-    <div class="well col-sm-12">
-        <form action="" enctype="multipart/form-data" method="post">
+    <div class="col-sm-8 col-sm-offset-2">
+        {% load crispy_forms_tags %}
+        <form role="form" class="form-horizontal" method="post">
             {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-primary" type="submit">Save Event</button>
+            {% crispy form %}
             {% if show_delete %}
                 <a href="{% url 'delete_event' form.instance.pk %}" class="btn btn-danger" type="submit">Delete Event</a>
             {% endif %}

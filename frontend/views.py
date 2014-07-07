@@ -27,7 +27,6 @@ def buy(request, event):
         data = request.POST
 
         #make a new transaction
-        logging.info(request.user)
         transaction = Transaction(user=request.user)
         transaction.save()
 
