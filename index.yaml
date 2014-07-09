@@ -167,6 +167,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: ticketing_historicalseat
+  properties:
+  - name: payment_type_id
+  - name: __key__
+    direction: desc
+
 - kind: ticketing_paymenttype
   properties:
   - name: __key__
@@ -238,6 +244,13 @@ indexes:
   - name: seat_id
   - name: __key__
     direction: desc
+
+- kind: ticketing_seat
+  properties:
+  - name: payment_type_id
+  - name: event_id
+  - name: transaction_id
+  - name: seat_id
 
 - kind: ticketing_seat
   properties:

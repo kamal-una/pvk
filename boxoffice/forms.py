@@ -5,7 +5,11 @@ from crispy_forms.layout import Submit
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.conf import settings
 
-from ticketing.models import Event, BuyerType
+from ticketing.models import Event
+from ticketing.models import BuyerType
+from ticketing.models import EventCategory
+from ticketing.models import Facility
+from ticketing.models import PaymentType
 
 
 class BootstrapMixin(ModelForm):
@@ -28,5 +32,19 @@ class EventForm(BootstrapMixin, ModelForm):
 class BuyerForm(BootstrapMixin, ModelForm):
     class Meta:
         model = BuyerType
-        
+
+
+class EventCategoryForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = EventCategory
+
+
+class FacilityForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = Facility
+
+
+class PaymentTypeForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = PaymentType
 

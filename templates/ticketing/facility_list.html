@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Facilities</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li class="active">Facilities</li>
+    </ol>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Seated</th>
+            <th>Number of seats</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Delete</th>
+        </tr>
+        {% for facility in facility_list %}
+            <tr>
+                <td><a href="{% url 'box_office_facility' facility.id %}">{{ facility.name }}</a></td>
+                <td>{{ facility.seated }}</td>
+                <td>{{ facility.number_of_seats }}</td>
+                <td>{{ facility.created }}</td>
+                <td>{{ facility.last_update }}</td>
+                <td><a href="{% url 'box_office_facility_delete' facility.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <a href="{% url 'box_office_facility_create' %}" class="btn btn-success" type="submit">Create Facility</a>
+</div>
+{% endblock %}

@@ -7,9 +7,11 @@
       <li class="active">Box Office</li>
     </ol>
     <ul class="nav nav-pills nav-stacked">
+        <li><a href="{% url 'box_office_facilities' %}">Facilities</a></li>
         <li><a href="{% url 'box_office_buyers' %}">Buyer Types</a></li>
         <li><a href="{% url 'box_office_event_categories' %}">Event Categories</a></li>
         <li><a href="{% url 'box_office_events' %}">Events</a></li>
+        <li><a href="{% url 'box_office_payment_types' %}">Payment Types</a></li>
     </ul>
 </div>
 {% endblock %}

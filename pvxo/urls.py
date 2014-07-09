@@ -8,6 +8,8 @@ admin.autodiscover()
 from boxoffice.views import EventListing, EventCreate, EventUpdate, EventDelete
 from boxoffice.views import BuyerListing, BuyerCreate, BuyerUpdate, BuyerDelete
 from boxoffice.views import EventCategoryListing, EventCategoryCreate, EventCategoryUpdate, EventCategoryDelete
+from boxoffice.views import FacilityListing, FacilityCreate, FacilityUpdate, FacilityDelete
+from boxoffice.views import PaymentTypeListing, PaymentTypeCreate, PaymentTypeUpdate, PaymentTypeDelete
 
 urlpatterns = patterns(
     'ticketing.views',
@@ -55,6 +57,16 @@ urlpatterns += patterns(
     url(r'^boxoffice/new-buyer/$', login_required(BuyerCreate.as_view()), name='box_office_buyer_create'),
     url(r'^boxoffice/buyer/(?P<pk>[-\w\ ]+)/$', login_required(BuyerUpdate.as_view()), name='box_office_buyer'),
     url(r'^boxoffice/delete-buyer/(?P<pk>[-\w\ ]+)/$', login_required(BuyerDelete.as_view()), name='box_office_buyer_delete'),
+
+    url(r'^boxoffice/facilities/$', login_required(FacilityListing.as_view()), name='box_office_facilities'),
+    url(r'^boxoffice/new-facility/$', login_required(FacilityCreate.as_view()), name='box_office_facility_create'),
+    url(r'^boxoffice/facility/(?P<pk>[-\w\ ]+)/$', login_required(FacilityUpdate.as_view()), name='box_office_facility'),
+    url(r'^boxoffice/delete-facility/(?P<pk>[-\w\ ]+)/$', login_required(FacilityDelete.as_view()), name='box_office_facility_delete'),
+
+    url(r'^boxoffice/payment-types/$', login_required(PaymentTypeListing.as_view()), name='box_office_payment_types'),
+    url(r'^boxoffice/new-payment-type/$', login_required(PaymentTypeCreate.as_view()), name='box_office_payment_type_create'),
+    url(r'^boxoffice/payment-type/(?P<pk>[-\w\ ]+)/$', login_required(PaymentTypeUpdate.as_view()), name='box_office_payment_type'),
+    url(r'^boxoffice/delete-payment-type/(?P<pk>[-\w\ ]+)/$', login_required(PaymentTypeDelete.as_view()), name='box_office_payment_type_delete'),
 
 )
 
