@@ -207,6 +207,13 @@ indexes:
 - kind: ticketing_seat
   properties:
   - name: buyer_type_id
+  - name: event_id
+  - name: transaction_id
+  - name: seat_id
+
+- kind: ticketing_seat
+  properties:
+  - name: buyer_type_id
   - name: performance_id
   - name: transaction_id
   - name: seat_id

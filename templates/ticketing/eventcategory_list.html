@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Event Categories</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li class="active">Event Categories</li>
+    </ol>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+        {% for event_category in eventcategory_list %}
+            <tr>
+                <td><a href="{% url 'box_office_event_category' event_category.id %}">{{ event_category.name }}</a></td>
+                <td>{{ event_category.description }}</td>
+                <td><a href="{% url 'box_office_event_category_delete' event_category.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <a href="{% url 'box_office_event_category_create' %}" class="btn btn-success" type="submit">Create Event Category</a>
+</div>
+{% endblock %}
