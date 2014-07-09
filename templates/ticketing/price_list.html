@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Prices</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li class="active">Prices</li>
+    </ol>
+    <table class="table">
+        <tr>
+            <th>Buyer Type</th>
+            <th>Price Matrix</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Delete</th>
+        </tr>
+        {% for price in price_list %}
+            <tr>
+                <td><a href="{% url 'box_office_price' price.id %}">{{ price.buyer_type }}</a></td>
+                <td>{{ price.matrix }}</td>
+                <td>{{ price.category }}</td>
+                <td>{{ price.price }}</td>
+                <td><a href="{% url 'box_office_price_delete' price.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <a href="{% url 'box_office_price_create' %}" class="btn btn-success" type="submit">Create Price</a>
+</div>
+{% endblock %}

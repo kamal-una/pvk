@@ -10,6 +10,9 @@ from ticketing.models import BuyerType
 from ticketing.models import EventCategory
 from ticketing.models import Facility
 from ticketing.models import PaymentType
+from ticketing.models import PriceCategory
+from ticketing.models import PriceMatrix
+from ticketing.models import Price
 
 
 class BootstrapMixin(ModelForm):
@@ -48,3 +51,17 @@ class PaymentTypeForm(BootstrapMixin, ModelForm):
     class Meta:
         model = PaymentType
 
+
+class PriceCategoryForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = PriceCategory
+
+
+class PriceMatrixForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = PriceMatrix
+
+
+class PriceForm(BootstrapMixin, ModelForm):
+    class Meta:
+        model = Price

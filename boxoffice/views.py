@@ -165,9 +165,94 @@ class PaymentTypeDelete(DeleteView):
         return reverse('box_office_payment_types')
 
 
+"""
+Price Categories
+"""
+from forms import PriceCategoryForm
+from ticketing.models import PriceCategory
+
+class PriceCategoryListing(ListView):
+    model = PriceCategory
+    paginate_by = 20
+
+class PriceCategoryCreate(CreateView):
+    model = PriceCategory
+    form_class = PriceCategoryForm
+
+    def get_success_url(self):
+        return reverse('box_office_price_categories')
+
+class PriceCategoryUpdate(UpdateView):
+    model = PriceCategory
+    form_class = PriceCategoryForm
+
+    def get_success_url(self):
+        return reverse('box_office_price_categories')
+
+class PriceCategoryDelete(DeleteView):
+    model = PriceCategory
+
+    def get_success_url(self):
+        return reverse('box_office_price_categories')
 
 
+"""
+Price Matrices
+"""
+from forms import PriceMatrixForm
+from ticketing.models import PriceMatrix
+
+class PriceMatrixListing(ListView):
+    model = PriceMatrix
+    paginate_by = 20
+
+class PriceMatrixCreate(CreateView):
+    model = PriceMatrix
+    form_class = PriceMatrixForm
+
+    def get_success_url(self):
+        return reverse('box_office_price_matrices')
+
+class PriceMatrixUpdate(UpdateView):
+    model = PriceMatrix
+    form_class = PriceMatrixForm
+
+    def get_success_url(self):
+        return reverse('box_office_price_matrices')
+
+class PriceMatrixDelete(DeleteView):
+    model = PriceMatrix
+
+    def get_success_url(self):
+        return reverse('box_office_price_matrices')
 
 
+"""
+Prices
+"""
+from forms import PriceForm
+from ticketing.models import Price
 
+class PriceListing(ListView):
+    model = Price
+    paginate_by = 20
 
+class PriceCreate(CreateView):
+    model = Price
+    form_class = PriceForm
+
+    def get_success_url(self):
+        return reverse('box_office_prices')
+
+class PriceUpdate(UpdateView):
+    model = Price
+    form_class = PriceForm
+
+    def get_success_url(self):
+        return reverse('box_office_prices')
+
+class PriceDelete(DeleteView):
+    model = Price
+
+    def get_success_url(self):
+        return reverse('box_office_prices')

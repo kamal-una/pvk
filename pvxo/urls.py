@@ -10,6 +10,9 @@ from boxoffice.views import BuyerListing, BuyerCreate, BuyerUpdate, BuyerDelete
 from boxoffice.views import EventCategoryListing, EventCategoryCreate, EventCategoryUpdate, EventCategoryDelete
 from boxoffice.views import FacilityListing, FacilityCreate, FacilityUpdate, FacilityDelete
 from boxoffice.views import PaymentTypeListing, PaymentTypeCreate, PaymentTypeUpdate, PaymentTypeDelete
+from boxoffice.views import PriceCategoryListing, PriceCategoryCreate, PriceCategoryUpdate, PriceCategoryDelete
+from boxoffice.views import PriceMatrixListing, PriceMatrixCreate, PriceMatrixUpdate, PriceMatrixDelete
+from boxoffice.views import PriceListing, PriceCreate, PriceUpdate, PriceDelete
 
 urlpatterns = patterns(
     'ticketing.views',
@@ -67,6 +70,21 @@ urlpatterns += patterns(
     url(r'^boxoffice/new-payment-type/$', login_required(PaymentTypeCreate.as_view()), name='box_office_payment_type_create'),
     url(r'^boxoffice/payment-type/(?P<pk>[-\w\ ]+)/$', login_required(PaymentTypeUpdate.as_view()), name='box_office_payment_type'),
     url(r'^boxoffice/delete-payment-type/(?P<pk>[-\w\ ]+)/$', login_required(PaymentTypeDelete.as_view()), name='box_office_payment_type_delete'),
+
+    url(r'^boxoffice/price-categories/$', login_required(PriceCategoryListing.as_view()), name='box_office_price_categories'),
+    url(r'^boxoffice/new-price-category/$', login_required(PriceCategoryCreate.as_view()), name='box_office_price_category_create'),
+    url(r'^boxoffice/price-category/(?P<pk>[-\w\ ]+)/$', login_required(PriceCategoryUpdate.as_view()), name='box_office_price_category'),
+    url(r'^boxoffice/delete-price-category/(?P<pk>[-\w\ ]+)/$', login_required(PriceCategoryDelete.as_view()), name='box_office_price_category_delete'),
+
+    url(r'^boxoffice/price-matrices/$', login_required(PriceMatrixListing.as_view()), name='box_office_price_matrices'),
+    url(r'^boxoffice/new-price-matrix/$', login_required(PriceMatrixCreate.as_view()), name='box_office_price_matrix_create'),
+    url(r'^boxoffice/price-matrix/(?P<pk>[-\w\ ]+)/$', login_required(PriceMatrixUpdate.as_view()), name='box_office_price_matrix'),
+    url(r'^boxoffice/delete-price-matrix/(?P<pk>[-\w\ ]+)/$', login_required(PriceMatrixDelete.as_view()), name='box_office_price_matrix_delete'),
+
+    url(r'^boxoffice/prices/$', login_required(PriceListing.as_view()), name='box_office_prices'),
+    url(r'^boxoffice/new-price/$', login_required(PriceCreate.as_view()), name='box_office_price_create'),
+    url(r'^boxoffice/price/(?P<pk>[-\w\ ]+)/$', login_required(PriceUpdate.as_view()), name='box_office_price'),
+    url(r'^boxoffice/delete-price/(?P<pk>[-\w\ ]+)/$', login_required(PriceDelete.as_view()), name='box_office_price_delete'),
 
 )
 
