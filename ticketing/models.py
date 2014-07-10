@@ -15,6 +15,29 @@ class Facility(models.Model):
     created = models.DateField(auto_now_add=True)
     last_update = models.DateField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        # save the facility...
+        if self.pk is None:
+            do_seats = True
+        else:
+            do_seats = False
+
+        super(Facility, self).save(*args, **kwargs)
+
+        # if new facility
+        if do_seats:
+            # create the seats...
+            if self.seated == False:
+                logging.info('Creating %s GA facility seats...', (self.number_of_seats))
+
+                for seat_number in xrange(1, self.number_of_seats + 1):
+                    logging.info('Seat %s', (seat_number))
+                    facility_seat = FacilitySeat(facility=self, 
+                                                 section='GA', 
+                                                 row='', 
+                                                 seat=seat_number)
+                    facility_seat.save()
+
     def __unicode__(self):
         return self.name
 
@@ -178,7 +201,7 @@ class Event(models.Model):
             for new_seat in all_seats:
                 new_seat_record = Seat(seat=new_seat, status=0, transaction=new_transaction, event=self, price=0)
                 new_seat_record.save()
-
+            
     def __unicode__(self):
         return str(self.name)
 
