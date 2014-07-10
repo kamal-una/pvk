@@ -13,6 +13,7 @@ from boxoffice.views import PaymentTypeListing, PaymentTypeCreate, PaymentTypeUp
 from boxoffice.views import PriceCategoryListing, PriceCategoryCreate, PriceCategoryUpdate, PriceCategoryDelete
 from boxoffice.views import PriceMatrixListing, PriceMatrixCreate, PriceMatrixUpdate, PriceMatrixDelete
 from boxoffice.views import PriceListing, PriceCreate, PriceUpdate, PriceDelete
+from boxoffice.views import TransactionListing
 
 urlpatterns = patterns(
     'ticketing.views',
@@ -85,6 +86,9 @@ urlpatterns += patterns(
     url(r'^boxoffice/new-price/$', login_required(PriceCreate.as_view()), name='box_office_price_create'),
     url(r'^boxoffice/price/(?P<pk>[-\w\ ]+)/$', login_required(PriceUpdate.as_view()), name='box_office_price'),
     url(r'^boxoffice/delete-price/(?P<pk>[-\w\ ]+)/$', login_required(PriceDelete.as_view()), name='box_office_price_delete'),
+
+    url(r'^boxoffice/transactions/$', login_required(TransactionListing.as_view()), name='box_office_transactions'),
+    url(r'^boxoffice/transaction/(?P<pk>[-\w\ ]+)/$', 'transaction_details', name='box_office_transaction'),
 
 )
 

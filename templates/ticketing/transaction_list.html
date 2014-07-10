@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Transactions</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li class="active">Transactions</li>
+    </ol>
+    <table class="table table-hover">
+        <tr>
+            <th>Date</th>
+            <th>User</th>
+        </tr>
+        {% for transaction in transaction_list %}
+            <tr>
+                <td><a href="{% url 'box_office_transaction' transaction.id %}">{{ transaction.date }}</a></td>
+                <td>{{ transaction.user }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -256,3 +256,47 @@ class PriceDelete(DeleteView):
 
     def get_success_url(self):
         return reverse('box_office_prices')
+
+
+"""
+Transactions
+"""
+from forms import TransactionForm
+from ticketing.models import Transaction, Seat
+
+class TransactionListing(ListView):
+    model = Transaction
+    paginate_by = 20
+
+#class TransactionCreate(CreateView):
+#    model = Transaction
+#    form_class = TransactionForm
+#
+#    def get_success_url(self):
+#        return reverse('box_office_transactions')
+
+def transaction_details(request, pk):
+    transaction = get_object_or_404(Transaction, pk=pk)
+    form = TransactionForm(instance=transaction)
+    seats = Seat.history.filter(transaction=transaction)
+
+    context = {'form': form,
+               'transaction': transaction,
+               'seats': seats}
+
+    html = render(request, 'ticketing/transaction_form.html', context)
+    return StreamingHttpResponse(html)
+
+
+class TransactionUpdate(UpdateView):
+    model = Transaction
+    form_class = TransactionForm
+
+    def get_success_url(self):
+        return reverse('box_office_transactions')
+
+#class TransactionDelete(DeleteView):
+#    model = Transaction
+#
+#    def get_success_url(self):
+#        return reverse('box_office_transactions')

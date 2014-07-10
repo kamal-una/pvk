@@ -31,7 +31,6 @@ class Facility(models.Model):
                 logging.info('Creating %s GA facility seats...', (self.number_of_seats))
 
                 for seat_number in xrange(1, self.number_of_seats + 1):
-                    logging.info('Seat %s', (seat_number))
                     facility_seat = FacilitySeat(facility=self, 
                                                  section='GA', 
                                                  row='', 
@@ -308,6 +307,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Transaction(models.Model):
     user = models.ForeignKey(CustomUser, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date']
 
     def __unicode__(self):
         return str(self.id)
