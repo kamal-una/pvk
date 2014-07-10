@@ -32,22 +32,12 @@ class Cart:
         return cart
 
     def add(self, product, unit_price, quantity=1):
-        try:
-            item = models.Item.objects.get(
-                cart=self.cart,
-                product=product,
-            )
-        except models.Item.DoesNotExist:
-            item = models.Item()
-            item.cart = self.cart
-            item.product = product
-            item.unit_price = unit_price
-            item.quantity = quantity
-            item.save()
-        else: #ItemAlreadyExists
-            item.unit_price = unit_price
-            item.quantity = item.quantity + int(quantity)
-            item.save()
+        item = models.Item()
+        item.cart = self.cart
+        item.product = product
+        item.unit_price = unit_price
+        item.quantity = quantity
+        item.save()
 
     def remove(self, product):
         try:

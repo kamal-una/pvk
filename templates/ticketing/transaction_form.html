@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
       <li><a href="{% url 'box_office' %}">Box Office</a></li>
       <li><a href="{% url 'box_office_transactions' %}">Transactions</a></li>
-      <li class="active">Edit</li>
+      <li class="active">Detail</li>
     </ol>
     <div class="col-sm-8 col-sm-offset-2">
         {% load crispy_forms_tags %}
@@ -30,7 +30,7 @@
         {% for seat in seats %}
             <tr>
                 <td>{{ seat.event }}</td>
-                <td><a href="{% url 'box_office_transaction' seat.id %}">{{ seat.seat }}</a></td>
+                <td><a href="{% url 'box_office_seat' seat.id %}">{{ seat.seat }}</a></td>
                 <td>{{ seat.buyer_type }}</td>
                 <td>{{ seat.user }}</td>
                 <td>{{ seat.price }}</td>

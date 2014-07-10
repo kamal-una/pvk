@@ -2,30 +2,28 @@
 {% block content %}
 <h1>Shopping cart</h1>
 
-<div class='container'>
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>Performance</th>
+        <th>Buyer Type</th>
+        <th>Price</th>
+    </tr>
+    {% for item in cart %}
         <tr>
-            <th>Performance</th>
-            <th>Buyer Type</th>
-            <th>Price</th>
+            <td>{{ item.product.event }}</td>
+            <td>{{ item.product.buyer_type }}</td>
+            <td>£{{ item.total_price|floatformat:2 }}</td>
         </tr>
-        {% for item in cart %}
-            <tr>
-                <td>{{ item.product.event }}</td>
-                <td>{{ item.product.buyer_type }}</td>
-                <td>£{{ item.total_price|floatformat:2 }}</td>
-            </tr>
-        {% endfor %}
-        {% if cart %}
-            <tr>
-                <td><strong>Total</strong></td>
-                <td></td>
-                <td><strong>£{{ total|floatformat:2 }}</strong></td>
-            </tr>
-        {% endif %}
-    </table>
-    <div class="">
-        <a class="btn btn-danger" href="{% url 'empty_cart' %}" role="button">Empty basket</a> <a class="btn btn-primary" href="{% url 'purchase' %}" role="button">Buy tickets</a>
-    </div>    
-</div>
+    {% endfor %}
+    {% if cart %}
+        <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td><strong>£{{ total|floatformat:2 }}</strong></td>
+        </tr>
+    {% endif %}
+</table>
+<div class="">
+    <a class="btn btn-danger" href="{% url 'empty_cart' %}" role="button">Empty basket</a> <a class="btn btn-primary" href="{% url 'purchase' %}" role="button">Buy tickets</a>
+</div>    
 {% endblock %}

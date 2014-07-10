@@ -49,6 +49,7 @@ def buy(request, event):
                             # add sets to cart...
                             cart = Cart(request)
                             for seat in locked_seats:
+                                logging.info('Adding seat to cart: %s' , (seat.id))
                                 cart.add(seat, seat.price, 1)
                             context.update({'success': 'Seats added to shopping cart'})
                         else:
@@ -62,6 +63,9 @@ def buy(request, event):
 def cart(request):
     cart = Cart(request)
     total = total_cart(cart)
+
+    cart = sorted(cart, key=lambda mapping: [mapping.product.event.name,
+                                             mapping.product.buyer_type.name])
 
     context = {'cart': cart,
                'total': total}

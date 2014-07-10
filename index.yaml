@@ -27,143 +27,8 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-- kind: core_venue
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroup
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: buyer_group_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: buyer_group_id
-    direction: desc
-  - name: buyer_type_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: buyer_type_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: buyer_type_id
-  - name: buyer_group_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyergroupmapping
-  properties:
-  - name: buyer_type_id
-    direction: desc
-  - name: buyer_group_id
-    direction: desc
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyertype
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_buyertype
-  properties:
-  - name: name
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_customuser
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_event
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_event
-  properties:
-  - name: date
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventbuyermapping
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventbuyermapping
-  properties:
-  - name: buyer_type_id
-  - name: event_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventbuyermapping
-  properties:
-  - name: event_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventbuyermapping
-  properties:
-  - name: event_id
-  - name: buyer_type_id
-
-- kind: ticketing_eventbuyermapping
-  properties:
-  - name: event_id
-    direction: desc
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventcategory
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_eventrun
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_facility
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_facilityseat
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_facilityseat
-  properties:
-  - name: seat
-  - name: __key__
-    direction: desc
-
 - kind: ticketing_historicalseat
   properties:
-  - name: buyer_type_id
   - name: __key__
     direction: desc
 
@@ -175,7 +40,31 @@ indexes:
 
 - kind: ticketing_historicalseat
   properties:
-  - name: payment_type_id
+  - name: event_id
+  - name: seat_id
+  - name: __key__
+    direction: desc
+
+- kind: ticketing_historicalseat
+  properties:
+  - name: id
+  - name: __key__
+    direction: desc
+
+- kind: ticketing_historicalseat
+  properties:
+  - name: id
+  - name: history_date
+
+- kind: ticketing_historicalseat
+  properties:
+  - name: id
+  - name: history_date
+    direction: desc
+
+- kind: ticketing_historicalseat
+  properties:
+  - name: seat_id
   - name: __key__
     direction: desc
 
@@ -185,56 +74,15 @@ indexes:
   - name: __key__
     direction: desc
 
-- kind: ticketing_paymenttype
+- kind: ticketing_historicalseat
   properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_price
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_price
-  properties:
-  - name: buyer_type_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_price
-  properties:
-  - name: category_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_price
-  properties:
-  - name: event_id
-  - name: price
-
-- kind: ticketing_pricecategory
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_pricematrix
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_seat
-  properties:
-  - name: buyer_type_id
-  - name: event_id
   - name: transaction_id
   - name: seat_id
 
 - kind: ticketing_seat
   properties:
-  - name: buyer_type_id
-  - name: performance_id
-  - name: transaction_id
-  - name: seat_id
+  - name: event_id
+  - name: status
 
 - kind: ticketing_seat
   properties:
@@ -259,62 +107,6 @@ indexes:
 
 - kind: ticketing_seat
   properties:
+  - name: seat_id
   - name: event_id
   - name: transaction_id
-    direction: desc
-  - name: seat_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_seat
-  properties:
-  - name: payment_type_id
-  - name: event_id
-  - name: transaction_id
-  - name: seat_id
-
-- kind: ticketing_seat
-  properties:
-  - name: performance_id
-  - name: transaction_id
-  - name: seat_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_seat
-  properties:
-  - name: seat_id
-    direction: desc
-  - name: event_id
-  - name: transaction_id
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_seat
-  properties:
-  - name: transaction_id
-  - name: event_id
-  - name: seat_id
-
-- kind: ticketing_transaction
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_transaction
-  properties:
-  - name: date
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_transaction
-  properties:
-  - name: date
-    direction: desc
-  - name: __key__
-    direction: desc
-
-- kind: ticketing_venue
-  properties:
-  - name: __key__
-    direction: desc

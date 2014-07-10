@@ -90,6 +90,10 @@ urlpatterns += patterns(
     url(r'^boxoffice/transactions/$', login_required(TransactionListing.as_view()), name='box_office_transactions'),
     url(r'^boxoffice/transaction/(?P<pk>[-\w\ ]+)/$', 'transaction_details', name='box_office_transaction'),
 
+    url(r'^boxoffice/seat/(?P<pk>[-\w\ ]+)/$', 'seat_details', name='box_office_seat'),
+
+    url(r'^boxoffice/event-summary/$', 'event_summary', name='box_office_event_summary'),
+
 )
 
 urlpatterns += patterns(

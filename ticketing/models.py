@@ -151,6 +151,8 @@ class Event(models.Model):
     def lock_seats(self, transaction, buyer, price, number_of_seats=1):
         # find an available seat...
         available_seats = self.seat_set.filter(status=0)
+
+        logging.info('Available seats: %s', (len(available_seats)))
         locked_seats = []
         pointer = 0
         
@@ -200,7 +202,24 @@ class Event(models.Model):
             for new_seat in all_seats:
                 new_seat_record = Seat(seat=new_seat, status=0, transaction=new_transaction, event=self, price=0)
                 new_seat_record.save()
-            
+
+    def total_count(self):
+        total_count = len(self.seat_set.all())
+        return total_count
+
+    def available_count(self):
+        available_count = len(self.seat_set.filter(status=0))
+        return available_count
+
+    def held_count(self):
+        held_count = len(self.seat_set.filter(status=1))
+        return held_count
+
+    def sold_count(self):
+        sold_count = len(self.seat_set.filter(status__gt=3).order_by('status'))
+        return sold_count
+
+
     def __unicode__(self):
         return str(self.name)
 

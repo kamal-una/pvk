@@ -10,7 +10,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 def box_office(request):
     context = {}
 
-    html = render(request, 'box_office.html', context)
+    html = render(request, 'ticketing/box_office.html', context)
     return StreamingHttpResponse(html)
 
 """
@@ -268,17 +268,14 @@ class TransactionListing(ListView):
     model = Transaction
     paginate_by = 20
 
-#class TransactionCreate(CreateView):
-#    model = Transaction
-#    form_class = TransactionForm
-#
-#    def get_success_url(self):
-#        return reverse('box_office_transactions')
-
 def transaction_details(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk)
     form = TransactionForm(instance=transaction)
-    seats = Seat.history.filter(transaction=transaction)
+    seats = Seat.history.filter(transaction=transaction).order_by('seat')
+
+    seats = sorted(seats, key=lambda mapping: [mapping.seat.section,
+                                               mapping.seat.row,
+                                               mapping.seat.seat])
 
     context = {'form': form,
                'transaction': transaction,
@@ -287,16 +284,25 @@ def transaction_details(request, pk):
     html = render(request, 'ticketing/transaction_form.html', context)
     return StreamingHttpResponse(html)
 
+def seat_details(request, pk):
+    seats = Seat.history.filter(id=pk)
 
-class TransactionUpdate(UpdateView):
-    model = Transaction
-    form_class = TransactionForm
+    seats = sorted(seats, key=lambda mapping: [mapping.transaction.date], reverse=True)
 
-    def get_success_url(self):
-        return reverse('box_office_transactions')
+    logging.info('number of records found: %s', (len(seats)))
 
-#class TransactionDelete(DeleteView):
-#    model = Transaction
-#
-#    def get_success_url(self):
-#        return reverse('box_office_transactions')
+    context = {'seats': seats}
+
+    html = render(request, 'ticketing/event_seat_details.html', context)
+    return StreamingHttpResponse(html)
+
+"""
+Event Summary
+"""
+def event_summary(request):
+    events = Event.objects.all()
+
+    context = {'events': events}
+
+    html = render(request, 'ticketing/event_summary.html', context)
+    return StreamingHttpResponse(html)
