@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li class="active">Box Office</li>
+    </ol>
+
+    <div class="col-sm-6">
+        <h2>Configuration</h2>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{% url 'box_office_facilities' %}">Facilities</a></li>
+            <li><a href="{% url 'box_office_buyers' %}">Buyer Types</a></li>
+            <li><a href="{% url 'box_office_event_categories' %}">Event Categories</a></li>
+            <li><a href="{% url 'box_office_events' %}">Events</a></li>
+            <li><a href="{% url 'box_office_payment_types' %}">Payment Types</a></li>
+            <li><a href="{% url 'box_office_price_categories' %}">Price Categories</a></li>
+            <li><a href="{% url 'box_office_price_matrices' %}">Price Matrices</a></li>
+            <li><a href="{% url 'box_office_prices' %}">Prices</a></li>
+            <li><a href="{% url 'box_office_transactions' %}">Transactions</a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Reports</h2>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{% url 'box_office_event_summary' %}">Event Summary</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

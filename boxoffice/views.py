@@ -268,6 +268,7 @@ class TransactionListing(ListView):
     model = Transaction
     paginate_by = 20
 
+@login_required
 def transaction_details(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk)
     form = TransactionForm(instance=transaction)
@@ -284,6 +285,7 @@ def transaction_details(request, pk):
     html = render(request, 'ticketing/transaction_form.html', context)
     return StreamingHttpResponse(html)
 
+@login_required
 def seat_details(request, pk):
     seats = Seat.history.filter(id=pk)
 
@@ -299,6 +301,7 @@ def seat_details(request, pk):
 """
 Event Summary
 """
+@login_required
 def event_summary(request):
     events = Event.objects.all()
 

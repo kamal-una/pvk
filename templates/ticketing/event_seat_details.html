@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Box Office Transactions</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li><a href="{% url 'box_office_transactions' %}">Transactions</a></li>
+      <li class="active">Seat Details</li>
+    </ol>
+    <table class="table table-hover">
+        <tr>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Seat</th>
+            <th>Buyer Type</th>
+            <th>User</th>
+            <th>Price</th>
+            <th>Payment Amount</th>
+            <th>Status</th>
+        </tr>
+        {% for seat in seats %}
+            <tr>
+                <td><a href="{% url 'box_office_transaction' seat.transaction.id %}">{{ seat.transaction.id }}</a></td>
+                <td>{{ seat.transaction.date }}</td>
+                <td>{{ seat.event }}</td>
+                <td><a href="{% url 'box_office_seat' seat.id %}">{{ seat.seat }}</a></td>
+                <td>{{ seat.buyer_type }}</td>
+                <td>{{ seat.user }}</td>
+                <td>{{ seat.price }}</td>
+                <td>{{ seat.payment_amount }}</td>
+                <td>{{ seat.get_status_display }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

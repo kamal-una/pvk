@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Box Office Event Summary</h1>
+<div class="content">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'box_office' %}">Box Office</a></li>
+      <li class="active">Event Summary</li>
+    </ol>
+    <table class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Run</th>
+            <th>Date</th>
+            <th>Total Seats</th>
+            <th>Held Seats</th>
+            <th>Sold Seats</th>
+            <th>Available Seats</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td><a href="{% url 'box_office_event' event.id %}">{{ event.name }}</a></td>
+                <td>{{ event.run }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.total_count }}</td>
+                <td>{{ event.held_count }}</td>
+                <td>{{ event.sold_count }}</td>
+                <td>{{ event.available_count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <a href="{% url 'box_office_event_create' %}" class="btn btn-success" type="submit">Create Event</a>
+</div>
+{% endblock %}
